@@ -19,6 +19,8 @@ CREATE TABLE tb_usr_professores (
     id SERIAL PRIMARY KEY,
     usuario_id INTEGER REFERENCES tb_usuarios(id),
     nome VARCHAR(255) NOT NULL,
+    titulacao VARCHAR(100),
+    tempo_docencia INTEGER
 );
 
 CREATE TABLE tb_usr_adm (

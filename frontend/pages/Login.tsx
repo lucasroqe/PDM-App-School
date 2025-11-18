@@ -1,28 +1,118 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, Alert } from "react-native";
+import { View, Text, TextInput, Button, Alert, StyleSheet, TouchableOpacity } from "react-native";
 import { useAuth } from "../context/AuthContext";
 
-export default function Login() {
+interface LoginProps {
+  navigation: {
+    navigate: (screen: string) => void;
+  };
+}
+
+export default function Login({ navigation }: LoginProps) {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
+    if (!email || !senha) {
+      Alert.alert("Erro", "Preencha email e senha");
+      return;
+    }
+
+    setLoading(true);
     try {
       await login(email, senha);
-    } catch {
-      Alert.alert("Erro", "Falha no login");
+    } catch (error: any) {
+      Alert.alert("Erro", error.response?.data?.error || "Falha no login");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", padding: 20 }}>
-      <Text style={{ fontSize: 24, marginBottom: 20 }}>Login</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Login</Text>
+      <Text style={styles.subtitle}>Sistema de Gerenciamento Acadêmico</Text>
 
-      <TextInput placeholder="Email" value={email} onChangeText={setEmail} style={{ marginBottom: 10, borderWidth: 1, padding: 8 }} />
-      <TextInput placeholder="Senha" secureTextEntry value={senha} onChangeText={setSenha} style={{ marginBottom: 20, borderWidth: 1, padding: 8 }} />
+      <TextInput
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        style={styles.input}
+      />
 
-      <Button title="Entrar" onPress={handleLogin} />
+      <TextInput
+        placeholder="Senha"
+        secureTextEntry
+        value={senha}
+        onChangeText={setSenha}
+        style={styles.input}
+      />
+
+      <Button
+        title={loading ? "Entrando..." : "Entrar"}
+        onPress={handleLogin}
+        disabled={loading}
+      />
+
+      <View style={styles.registerContainer}>
+        <Text style={styles.registerText}>Não tem conta?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('CadastroAluno')}>
+          <Text style={styles.registerLink}>Cadastre-se como Aluno</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('CadastroProfessor')}>
+          <Text style={styles.registerLink}>Cadastre-se como Professor</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: "#f5f5f5",
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    marginBottom: 10,
+    textAlign: "center",
+    color: "#333",
+  },
+  subtitle: {
+    fontSize: 16,
+    marginBottom: 30,
+    textAlign: "center",
+    color: "#666",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    padding: 12,
+    marginBottom: 15,
+    fontSize: 16,
+    backgroundColor: "#fff",
+  },
+  registerContainer: {
+    marginTop: 30,
+    alignItems: "center",
+  },
+  registerText: {
+    fontSize: 14,
+    color: "#666",
+    marginBottom: 10,
+  },
+  registerLink: {
+    fontSize: 14,
+    color: "#007AFF",
+    marginBottom: 5,
+    textDecorationLine: "underline",
+  },
+});

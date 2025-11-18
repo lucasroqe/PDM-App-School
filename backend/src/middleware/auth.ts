@@ -10,7 +10,7 @@ export interface AuthRequest extends Request {
 
 export const autenticarToken = (req: AuthRequest, res: Response, next: NextFunction): void => {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+  const token = authHeader && authHeader.split(' ')[1]; 
 
   if (!token) {
     res.status(401).json({ error: 'Token de acesso requerido' });
@@ -30,15 +30,6 @@ export const autenticarToken = (req: AuthRequest, res: Response, next: NextFunct
     
     next();
   });
-};
-
-// Middleware para verificar tipo de usuário
-export const requerirAdmin = (req: AuthRequest, res: Response, next: NextFunction): void => {
-  if (req.usuario?.tipo_usuario !== 'admin') {
-    res.status(403).json({ error: 'Acesso negado: requer perfil de administrador' });
-    return;
-  }
-  next();
 };
 
 export const requerirProfessor = (req: AuthRequest, res: Response, next: NextFunction): void => {
