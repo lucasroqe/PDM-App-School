@@ -63,7 +63,7 @@ export default function CadastroProfessor({ navigation }: CadastroProfessorProps
 
   return (
     <ScrollView style={styles.container}>
-      {user && navigation && (
+      {navigation && (
         <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.backButton}>
           <Text style={styles.backButtonText}>← Voltar</Text>
         </TouchableOpacity>
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: 16,
-    color: "#007AFF",
+    color: "#077a87",
   },
   title: {
     fontSize: 24,
@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 15,
     fontSize: 16,
+    color: "#999999"
   },
 });
 

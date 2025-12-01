@@ -88,3 +88,22 @@ export interface BoletimResponse {
   curso: string;
   disciplinas: BoletimItem[];
 }
+
+export interface Aviso {
+  id: number;
+  titulo: string;
+  conteudo: string;
+  autor_id: number;
+  autor_nome?: string;
+  tipo: string;
+  criado_em: string;
+  atualizado_em: string;
+  ativo: boolean;
+  lido?: boolean;
+}
+
+export interface CriarAvisoRequest {
+  titulo: string;
+  conteudo: string;
+  tipo?: 'geral' | 'lembrete' | 'institucional';
+}

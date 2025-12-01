@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: 16,
-    color: "#007AFF",
+    color: "#077a87",
   },
   title: {
     fontSize: 24,

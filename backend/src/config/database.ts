@@ -10,8 +10,6 @@ const databaseConfig = {
   user: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || '',
   max: 20,
-  // idleTimeoutMillis: 30000,
-  // connectionTimeoutMillis: 2000,
 };
 
 const pool = new Pool(databaseConfig);

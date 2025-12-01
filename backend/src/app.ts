@@ -3,6 +3,7 @@ import { corsMiddleware } from './middleware/cors';
 import authRoutes from './routes/authRoutes';
 import cadastroRoutes from './routes/cadastroRoutes';
 import boletimRoutes from './routes/boletimRoutes';
+import avisosRoutes from './routes/avisosRoutes';
 
 const app = express();
 const port = process.env.PORT || 3333;
@@ -14,6 +15,7 @@ app.use(corsMiddleware);
 app.use('/auth', authRoutes);
 app.use('/cadastro', cadastroRoutes);
 app.use('/boletim', boletimRoutes);
+app.use('/avisos', avisosRoutes);
 
 app.get('/', (req, res) => {
   res.send('Servidor Express ok');

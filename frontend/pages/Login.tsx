@@ -24,7 +24,7 @@ export default function Login({ navigation }: LoginProps) {
     try {
       await login(email, senha);
     } catch (error: any) {
-      Alert.alert("Erro", error.response?.data?.error || "Falha no login");
+      Alert.alert(error.response?.data?.error);
     } finally {
       setLoading(false);
     }
@@ -32,11 +32,11 @@ export default function Login({ navigation }: LoginProps) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>LOGIN</Text>
       <Text style={styles.subtitle}>Sistema de Gerenciamento Acadêmico</Text>
 
       <TextInput
-        placeholder="Email"
+        placeholder="abc@gmail.com"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -45,7 +45,7 @@ export default function Login({ navigation }: LoginProps) {
       />
 
       <TextInput
-        placeholder="Senha"
+        placeholder="1234"
         secureTextEntry
         value={senha}
         onChangeText={setSenha}
@@ -56,6 +56,7 @@ export default function Login({ navigation }: LoginProps) {
         title={loading ? "Entrando..." : "Entrar"}
         onPress={handleLogin}
         disabled={loading}
+        color="#6d0787"
       />
 
       <View style={styles.registerContainer}>
@@ -99,6 +100,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 16,
     backgroundColor: "#fff",
+    color: "#999999"
   },
   registerContainer: {
     marginTop: 30,
@@ -113,6 +115,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#007AFF",
     marginBottom: 5,
-    textDecorationLine: "underline",
   },
 });

@@ -62,9 +62,7 @@ CREATE INDEX idx_professores_usuario_id ON tb_usr_professores(usuario_id);
 CREATE INDEX idx_adm_usuario_id ON tb_usr_adm(usuario_id);
 
 CREATE OR REPLACE VIEW vw_usuarios_com_nome AS
-SELECT 
-  u.*, 
-  COALESCE(a.nome, p.nome, adm.nome) AS nome
+SELECT u.*, COALESCE(a.nome, p.nome, adm.nome) AS nome
 FROM tb_usuarios u
 LEFT JOIN tb_usr_alunos a ON u.id = a.usuario_id
 LEFT JOIN tb_usr_professores p ON u.id = p.usuario_id

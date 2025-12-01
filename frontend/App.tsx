@@ -6,9 +6,11 @@ import CadastroAluno from "./pages/CadastroAluno";
 import CadastroProfessor from "./pages/CadastroProfessor";
 import CadastroDisciplina from "./pages/CadastroDisciplina";
 import Boletim from "./pages/Boletim";
+import Avisos from "./pages/Avisos";
+import CriarAviso from "./pages/CriarAviso";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
-type Screen = 'Login' | 'Home' | 'CadastroAluno' | 'CadastroProfessor' | 'CadastroDisciplina' | 'Boletim';
+type Screen = 'Login' | 'Home' | 'CadastroAluno' | 'CadastroProfessor' | 'CadastroDisciplina' | 'Boletim' | 'Avisos' | 'CriarAviso';
 
 function AppContent() {
   const { user, loading } = useAuth();
@@ -57,6 +59,10 @@ function AppContent() {
       return <CadastroDisciplina navigation={navigation} />;
     case 'Boletim':
       return <Boletim navigation={navigation} />;
+    case 'Avisos':
+      return <Avisos navigation={navigation} />;
+    case 'CriarAviso':
+      return <CriarAviso navigation={navigation} />;
     case 'Home':
     default:
       return <Home navigation={navigation} />;
